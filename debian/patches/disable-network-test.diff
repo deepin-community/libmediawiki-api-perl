@@ -1,0 +1,18 @@
+Subject: disable tests that rely on a working network connection
+Origin: vendor
+Forwarded: not-needed
+From: Ansgar Burchardt <ansgar@debian.org>
+Reviewed-by: gregor herrmann <gregoa@debian.org>
+Last-Update: 2014-10-17
+
+--- a/t/10-api.t
++++ b/t/10-api.t
+@@ -6,6 +6,8 @@
+ use Test::More;
+ use LWP::UserAgent;
+ 
++plan skip_all => "Unset NO_NETWORK to enable this test" if $ENV{NO_NETWORK};
++
+ sub get_url {
+   my $url = shift;
+   my $ua = LWP::UserAgent->new;
